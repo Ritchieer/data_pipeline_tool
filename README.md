@@ -33,6 +33,7 @@ Low: min
 Close: last
 
 Volume: sum
+
 ✔ 4. Deterministic Output Path
 
 Automatically saves output CSV files into:
