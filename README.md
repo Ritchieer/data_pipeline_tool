@@ -1,159 +1,146 @@
-🚀 Market Data Pipeline Tool
+# Market Data Pipeline Tool
+High-performance OHLCV processing for quantitative research and backtesting.
 
-High-Performance OHLCV Processing for Quantitative Research & Backtesting
+This repository provides a clean and reproducible Python-based pipeline for transforming raw minute-level futures/crypto market data into analysis-ready OHLCV datasets.  
+Developed by a **CQF Candidate** with real trading experience in MNQ/NQ micro futures.
 
-This repository contains a clean, modular, and production-ready Python Market Data Pipeline designed for quantitative trading research.
-It transforms raw minute-level futures/crypto data into analysis-ready, vectorized OHLCV datasets suitable for backtesting, machine learning, and systematic strategy development.
+---
 
-Developed by a CQF Candidate with real trading experience in MNQ/NQ micro futures, this tool reflects both practical trading needs and professional quant engineering standards.
+## Features
 
-🔧 Features
-1. Raw Market Data Simulation
+### 1. Raw Data Simulation
 
-Generates realistic minute-level OHLCV data using a stochastic price model (random walk), including optional missing values to emulate exchange imperfections.
+- Generates realistic 1-minute OHLCV data using a random-walk model.
+- Includes intentionally missing values to emulate real exchange imperfections.
 
-2. Data Cleaning
+### 2. Data Cleaning
 
-Forward-fills missing OHLC values
+- Forward-fills missing OHLC values.
+- Replaces missing Volume with 0.
+- Ensures index continuity for downstream analysis.
 
-Replaces missing Volume with 0
+### 3. Resampling Engine
 
-Cleans malformed rows while preserving the chronological index
+- Converts 1-minute data to 5-minute, 15-minute, or hourly bars.
+- Fully vectorized Pandas operations (no loops).
 
-3. Resampling Engine
+Aggregation rules:
 
-Converts 1-minute bars to 5-minute, 15-minute, or hourly OHLCV bars using optimized pandas vectorization:
+Open -> first
+High -> max
+Low -> min
+Close -> last
+Volume -> sum
 
-Open → first
+### 4. Deterministic Output Path
 
-High → max
+Output CSV files are always saved under:
 
-Low → min
+data_pipeline_tool/data/
 
-Close → last
+regardless of the execution directory, using `__file__` to resolve paths.
 
-Volume → sum
+---
 
-4. Deterministic File Output
-
-Automatically saves processed data to:
-
-(data_pipeline_tool_root)/data/
-
-
-using a stable __file__-based path resolver (works even when run from another directory).
-
-📂 Project Structure
+## Project Structure
 data_pipeline_tool/
 │
 ├─ data_pipeline_tool/
-│   ├─ src/
-│   │   └─ data_processor.py     # Main pipeline script
-│   └─ data/
-│       └─ NQ_5min_processed.csv # Output generated after execution
+│ ├─ src/
+│ │ └─ data_processor.py # Main pipeline script
+│ └─ data/
+│ └─ NQ_5min_processed.csv # Auto-generated output
 │
 └─ README.md
 
-🧪 Running the Pipeline
+---
 
-Run from repository root:
+## How to Run
+
+From the project root, run:
 
 python data_pipeline_tool/src/data_processor.py
 
 
-Upon completion, you will see:
+After running, you will see:
 
-Simulation summary
-
-Cleaning report
-
-Resampling logs
-
-Generated CSV located in:
+- Simulation logs
+- Cleaning summary
+- Resampling summary
+- Output CSV at:
 
 data/NQ_5min_processed.csv
 
-📊 Use Cases
+---
 
-This pipeline is ideal for:
+## Use Cases
 
-Futures & crypto strategy research
+This pipeline is suitable for:
 
-Machine learning model dataset preparation
+- Futures & crypto strategy research
+- Backtesting preparation
+- Machine learning dataset generation
+- Quant portfolio projects
+- Teaching or demonstrating market data preprocessing
 
-Building a clean preprocessing layer for quant workflows
+---
 
-Educational or portfolio projects demonstrating quant engineering
+## Technology Stack
 
-Expandable for:
+- Python 3.9+
+- Pandas
+- NumPy
 
-Technical indicators
+Clean, modular, and quant-oriented code architecture.
 
-Live market data ingestion
+---
 
-Backtesting engine integration
+## Planned Additions
 
-🛠 Technology Stack
+- Technical indicators (MA, RSI, Bollinger Bands)
+- MNQ strategy example (5-minute trend or volatility compression)
+- Monte Carlo robustness tests
+- Binance / IBKR API data ingestion
+- Full Quant Starter Kit (Pipeline + Backtest + Risk Tools)
 
-Python 3.9+
+---
 
-Pandas
+# About the Author
 
-NumPy
+### Quant Research & Python Backtesting Consultant (CQF Candidate)
 
-Modular, readable, quant-oriented architecture
+Experience includes:
 
-📈 Planned Enhancements
+- MNQ / NQ / ES futures trading
+- Market data engineering
+- Vectorized backtesting
+- Position sizing and risk modeling
 
-Technical indicators (MA, RSI, Bollinger Bands, ATR)
+I help traders and developers convert trading ideas into **clean, testable, systematic Python workflows**.
 
-MNQ strategy example (trend or volatility compression)
+---
 
-Monte Carlo robustness add-on
+## Contact
 
-Binance / IBKR API ingestion
-
-Unified “Quant Starter Kit” (Pipeline + Backtest + Risk Tools)
-
-👨‍💻 About the Author
-Quant Research & Python Backtesting Consultant (CQF Candidate)
-
-MNQ / NQ / ES futures practitioner.
-I help traders and developers turn trading ideas into clean, testable Python systems with:
-
-Market data engineering
-
-Vectorized backtesting
-
-Risk modeling & position sizing
-
-Strategy prototyping
-
-📬 Contact
-LinkedIn
-
+**LinkedIn:**  
 https://www.linkedin.com/in/chih-hsiao-82558a368/
 
-Upwork
+**Upwork:**  
+(Coming soon – link will be added once available)
 
-(Coming soon — will be added once available)
+---
 
-⭐ Support
+## Support
 
-If you find this project useful, please consider starring the repository.
+If you find this project helpful, please consider starring the repository.
 
-🚀 Final Note
+---
 
-This repository functions as both a practical tool and part of a professional quant portfolio, demonstrating capability in:
+## Final Note
 
-Clean code architecture
+This project serves as both a functional tool and part of a professional quant portfolio, demonstrating:
 
-Quant workflow design
-
-Realistic trading knowledge
-
-Production-ready data engineering
-
-Perfect for recruiters, quant teams, and clients evaluating technical depth.
-
-📌 End of README
+- Clean engineering
+- Practical market understanding
+- Backtesting readiness
+- Reliable data workflow design
